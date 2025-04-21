@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumePro - Analysis Results</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <style>
+
+.score-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+/* Circular Progress Bar */
+.circle {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(#4caf50 0%, #ccc 0%); /* Dynamic progress */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 1.5s ease-in-out;
+}
+
+/* Inner Circle */
+.circle-inner {
+    width: 130px;
+    height: 130px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Score Value */
+#score-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    animation: fadeIn 1.5s ease-out;
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Button Transition */
+.cta-button {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ff7e00;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cta-button:hover {
+    background-color: #ffa500;
+    transform: scale(1.05);
+}
+
+/* Results Section */
+.results-section {
+    margin: 4rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    text-align: center;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.results-section h2 {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    color: #333;
+    font-weight: bold;
+}
+
+.results-section h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #4caf50; /* A green shade to indicate positivity */
+}
+
+.results-section ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    text-align: left;
+    margin: 0 auto;
+    max-width: 500px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+}
+
+.results-section ul li {
+    margin-bottom: 0.8rem;
+}
+
+.results-section ul li:before {
+    content: '';
+    margin-right: 0.5rem;
+    color: #4caf50;
+    font-weight: bold;
+}
+
+/* Smooth Section Load Animation */
+.results-section {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animations */
+@keyframes countUp {
+    from {
+        content: "0%";
+    }
+    to {
+        content: "85%"; /* Match the score */
+    }
+}
+
+    </style>
+    <!-- Header Section -->
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" style="color: white; text-decoration: none;">
+                <h1 style="margin: 0; display: inline;">ResumePro</h1>
+            </a>            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="upload.html">Analyze Resume</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Results Section -->
+<section class="results-section">
+    <h2>Your Resume Analysis Result</h2>
+
+    <!-- Circular Score Display -->
+<div class="score-container">
+    <div class="circle">
+        <div class="circle-inner">
+            <span id="score-value">0%</span>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Suggested Improvements -->
+    <h3>Suggested Improvements:</h3>
+    <ul>
+        <li>Use more ATS-friendly keywords</li>
+        <li>Format contact details correctly</li>
+        <li>Avoid using tables or images in the resume</li>
+    </ul>
+
+    <a href="upload.html" class="cta-button">Upload Another Resume</a>
+</section>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const scoreElement = document.getElementById("score-value");
+        const circle = document.querySelector(".circle");
+        const targetScore = 85; // Target score as a percentage
+        let currentScore = 0;
+
+        const interval = setInterval(() => {
+            currentScore++;
+            scoreElement.textContent = `${currentScore}%`;
+
+            // Update the circle background dynamically
+            const percentage = (currentScore / 100) * 360; // Convert percentage to degrees
+            circle.style.background = `conic-gradient(#4caf50 ${percentage}deg, #ccc 0deg)`;
+
+            if (currentScore >= targetScore) {
+                clearInterval(interval);
+            }
+        }, 15); // Adjust the speed of the animation (15ms per increment)
+    });
+</script>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2024 ResumePro. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
